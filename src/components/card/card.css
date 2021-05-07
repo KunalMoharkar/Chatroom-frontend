@@ -1,0 +1,13 @@
+
+.Card{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 300px;
+    background-color: darkseagreen;
+    height: 200px;
+    padding: 10px;
+    margin: 10px;
+}
