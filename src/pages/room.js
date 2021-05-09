@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import socketIOClient from "socket.io-client";
+import './room.css';
 const ENDPOINT = "http://127.0.0.1:5000";
 
 
@@ -24,7 +25,7 @@ export const Room =(props)=>{
   //keep listening for server events
   useEffect(() => {
     
-    console.log(props.match.params.action);
+    //console.log(props.match.params.action);
 
     const socket = socketIOClient(ENDPOINT);
     setSocket(socket);
@@ -46,7 +47,7 @@ export const Room =(props)=>{
   }, []);
 
 
-  const createRoom = async () =>{
+  const createRoom = async (evt) =>{
 
     try {
 
@@ -72,6 +73,8 @@ export const Room =(props)=>{
     } catch (error) {
       console.log(error);
     }
+
+    evt.preventDefault();
 
   }
 
@@ -134,7 +137,7 @@ export const Room =(props)=>{
 
   }
   
-  else if(action == "create" && showChatwindow === false )
+  else if(showChatwindow === false )
   {
      displayForm = 
                         <form onSubmit={createRoom}>
@@ -160,32 +163,46 @@ export const Room =(props)=>{
 
   return(
 
-    <div>
+    <div className="chatWindowContainer">
       
       { showChatwindow?
-      <div>
-      {messageQueue.map((message)=>{
-
-          return(
-            <div>
-              {message.text}
-            </div>
-          )
-
-      })}
       
-      <form onSubmit={handleSubmit}>
-        <label>
-          Message:
-          <input
-            type="text"
-            value={name}
-            onChange={e => setName(e.target.value)}
-          />
-        </label>
-        <input type="submit" value="Send" />
-      </form>
-      </div>
+      <div className="messageBox">
+
+          <div className="participantsList">
+                <h3>Participants</h3>
+          </div>
+
+          <div className="messagesList">
+              <div className="messageQueue">
+                  {messageQueue.map((message)=>{
+                      return(
+                        <div className="message">
+                            <span>{message.from}</span>
+                            <p>
+                            {message.text}
+                            </p>
+                        </div>
+                      )
+                  })} 
+              </div>
+
+              <div>
+                <form onSubmit={handleSubmit}>
+                  <label>
+                    Message:
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={e => setName(e.target.value)}
+                    />
+                  </label>
+                  <input type="submit" value="Send" />
+                </form>
+              </div>
+            </div>
+          </div>
+            
       :null
       }
 
