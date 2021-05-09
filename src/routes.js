@@ -10,7 +10,7 @@ export const Routes=()=>{
 
         <HashRouter>
             <Route exact path={"/"} component={App}/>
-            <Route exact path={"/Room/"} component={Room}/>
+            <Route exact path={"/Room/:action"} component={Room}/>
         </HashRouter>
     )
 
