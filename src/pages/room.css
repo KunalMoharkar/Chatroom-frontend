@@ -1,8 +1,15 @@
 
 .chatWindowContainer{
 
-    padding: 20px;
-    margin: 10px;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    padding-left: 5%;
+    padding-right: 5%;
+    display: flex;
+    width: 90%;
+    height: 90vh;
+    align-items: center;
+    justify-content: center;
 
 }
 
@@ -21,11 +28,15 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    width: 60%;
+    width: 80%;
     padding: 20px;
     height: 70vh;
     margin: 0px;
     
+}
+
+.messageInput{
+    width: 100%;
 }
 
 .messageQueue{
@@ -70,3 +81,72 @@
 }
 
 
+.form{
+    display: flex;
+    width: max-content;
+    flex-direction: column;
+    height: auto;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 30px;
+    margin: 10px;
+    background-color: blueviolet;
+    border-radius: 5px;
+}
+
+.form input, .messageForm input{
+
+    border-radius: 20px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    outline: none;
+    margin: 5px;
+    margin-left: 0px;
+    border: 2px solid saddlebrown;
+}
+
+.form input, .messageForm input:focus{
+    outline: none;
+}
+
+.form button{
+
+    align-self: center;
+    padding: 8px;
+    margin: 8px;
+    background-color: burlywood;
+    border: none;
+    transition-duration: 500ms;
+}
+
+.form button:hover{
+    border: none;
+    outline: none;
+    background-color: brown;
+}
+
+.form button:focus{
+    border: none;
+    outline: none;
+}
+
+.messageForm{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.messageForm button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:40px;
+    width: 40px;
+    outline: none;
+    border: 2px solid royalblue;
+    background-color: rebeccapurple;
+    border-radius: 50%;
+}

@@ -49,6 +49,8 @@ export const Room =(props)=>{
 
   const createRoom = async (evt) =>{
 
+    evt.preventDefault();
+
     try {
 
       const response = await fetch(`${ENDPOINT}/getRoomId`,{
@@ -59,26 +61,28 @@ export const Room =(props)=>{
 
 
       const data = await response.json();
-
-      console.log(data);
-      setRoomId(data.roomId);
-
+      
       socket.emit('join-room',{
         username: userName,
         roomId: roomId,
       });
+      
 
+      console.log(data);
+      setRoomId(data.roomId);
       setshowChatwindow(true);
 
     } catch (error) {
       console.log(error);
     }
 
-    evt.preventDefault();
+    
 
   }
 
   const joinRoom = (evt) =>{
+
+    evt.preventDefault();
 
     socket.emit('join-room',{
       username: userName,
@@ -87,7 +91,7 @@ export const Room =(props)=>{
 
     setshowChatwindow(true);
 
-    evt.preventDefault();
+    
 
   }
 
@@ -114,24 +118,26 @@ export const Room =(props)=>{
 
   if(action === "join" && showChatwindow === false)
   {
-     displayForm =   <form onSubmit={joinRoom}>
+     displayForm =   <form className="form" onSubmit={joinRoom}>
                                   <label>
                                     Username:
+                                  </label>
                                     <input
                                       type="text"
                                       value={userName}
                                       onChange={e => setUserName(e.target.value)}
                                     />
-                                  </label>
+                                 
                                   <label>
                                     Room code:
+                                  </label>
                                     <input
                                       type="text"
                                       value={roomId}
                                       onChange={e => setRoomId(e.target.value)}
                                     />
-                                  </label>
-                                  <input type="submit" value="Join Room" />
+                                  
+                                  <button type="submit">Join Room</button>
                            </form>
 
 
@@ -140,17 +146,17 @@ export const Room =(props)=>{
   else if(showChatwindow === false )
   {
      displayForm = 
-                        <form onSubmit={createRoom}>
+                        <form className="form" onSubmit={createRoom}>
                           <label>
                             Username:
+                          </label>
                             <input
                               type="text"
                               value={userName}
                               onChange={e => setUserName(e.target.value)}
                             />
-                          </label>
-                          
-                          <input type="submit" value="Create Room" />
+                        
+                          <button type="submit">Create Room</button>
                         </form>
 
   }
@@ -187,17 +193,16 @@ export const Room =(props)=>{
                   })} 
               </div>
 
-              <div>
-                <form onSubmit={handleSubmit}>
-                  <label>
-                    Message:
+              <div className="messageInput">
+                <form className="messageForm" onSubmit={handleSubmit}>
                     <input
                       type="text"
+                      placeholder="Enter your message here"
                       value={name}
                       onChange={e => setName(e.target.value)}
                     />
-                  </label>
-                  <input type="submit" value="Send" />
+                  
+                    <button type="submit">Send</button>
                 </form>
               </div>
             </div>
