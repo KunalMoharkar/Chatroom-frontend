@@ -1,14 +1,14 @@
 
 .chatWindowContainer{
 
-    padding-top: 5vh;
+    padding-top: 5px;
     padding-bottom: 5vh;
     padding-left: 5%;
     padding-right: 5%;
     display: flex;
     width: 90%;
     height: 90vh;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 
 }
@@ -28,7 +28,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    width: 80%;
+    width: 600px;
     padding: 20px;
     height: 70vh;
     margin: 0px;
@@ -42,11 +42,12 @@
 .messageQueue{
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 600px;
+    min-height: 500px;
     align-items: flex-start;
     justify-content: flex-start;
-    overflow-y: scroll;
-    
+    overflow-y: scroll;    
+    background-color: rgb(134, 11, 27);
 }
 
 .message p{
@@ -61,11 +62,13 @@
 
 .message{
 
-    width: 50%;
+    max-width: 400px;
+    height: auto;
     padding: 3px;
     margin: 3px;
     border-radius: 3px;
     background-color: bisque;
+    word-wrap: break-word;
 
 }
 
@@ -94,9 +97,22 @@
     border-radius: 5px;
 }
 
-.form input, .messageForm input{
+.form input{
 
     border-radius: 20px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    outline: none;
+    margin: 5px;
+    margin-left: 0px;
+    border: 2px solid saddlebrown;
+}
+
+.messageForm input{
+
+    border-radius: 20px;
+    width: 80%;
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
@@ -135,7 +151,7 @@
     display: flex;
     width: 100%;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 10px;
 }
 

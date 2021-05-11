@@ -1,0 +1,17 @@
+
+
+.header{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    height: 7vh;
+    margin-bottom: 20px;
+    justify-content: flex-start;
+    background-color: aqua;
+}
+
+.header h2{
+
+    font-size: 24px;
+    margin-left: 10px;
+}

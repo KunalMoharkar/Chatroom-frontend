@@ -1,9 +1,11 @@
 import React, {useState,useEffect} from 'react';
 import socketIOClient from "socket.io-client";
+import {Redirect} from 'react-router-dom';
 import './room.css';
+
+import {Header}  from '../components/Header/Header'
+
 const ENDPOINT = "http://127.0.0.1:5000";
-
-
 
 export const Room =(props)=>{
 
@@ -16,6 +18,9 @@ export const Room =(props)=>{
   const [userName, setUserName] = useState("");
   const [roomId, setRoomId] = useState("");
 
+  //track error state
+  const [error,setError] = useState(null);
+
   //queue for incoming messages
   const [messageQueue, setMessageQueue] = useState([]);
 
@@ -25,20 +30,25 @@ export const Room =(props)=>{
   //keep listening for server events
   useEffect(() => {
     
-    //console.log(props.match.params.action);
-
+    
     const socket = socketIOClient(ENDPOINT);
     setSocket(socket);
 
     socket.on("connect", () => {
       console.log(socket.id); 
     });
+
+    socket.on("error", (message)=>{
+
+      console.log(message.errorMsg)
+      setError(message.errorMsg);
+      console.log("some rrror cooured");
+
+    })
   
 
     socket.on('receive-message', (message)=>{
-      
     console.log(message);
-
     //populate message queue
     setMessageQueue(state => [...state, message])
 
@@ -61,19 +71,24 @@ export const Room =(props)=>{
 
 
       const data = await response.json();
+      console.log(data);
+      console.log("asddsa");
+      console.log(`room id is - ${data.roomId}`);
+      setRoomId(data.roomId);
       
       socket.emit('join-room',{
         username: userName,
-        roomId: roomId,
+        roomId: data.roomId,
       });
       
 
       console.log(data);
-      setRoomId(data.roomId);
+      
       setshowChatwindow(true);
 
     } catch (error) {
       console.log(error);
+      
     }
 
     
@@ -88,14 +103,11 @@ export const Room =(props)=>{
       username: userName,
       roomId: roomId,
     });
-
+    
+  
     setshowChatwindow(true);
 
-    
-
   }
-
-
 
   const handleSubmit = (evt) => {
 
@@ -169,8 +181,20 @@ export const Room =(props)=>{
 
   return(
 
+    
+
+
+    <div>
+
+      {error?<Redirect
+            to={{
+            pathname: "/",
+          }}
+        />:null}
+    <Header roomId={roomId} />
     <div className="chatWindowContainer">
-      
+
+    
       { showChatwindow?
       
       <div className="messageBox">
@@ -213,9 +237,8 @@ export const Room =(props)=>{
 
       {displayForm}
   
-
     </div>
-
+  </div>
   )
 
 
