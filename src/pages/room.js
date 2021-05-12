@@ -21,6 +21,9 @@ export const Room =(props)=>{
   //track error state
   const [error,setError] = useState(null);
 
+  //participants
+  const [participantsList, setParticipantsList] = useState([]);
+
   //queue for incoming messages
   const [messageQueue, setMessageQueue] = useState([]);
 
@@ -38,6 +41,8 @@ export const Room =(props)=>{
       console.log(socket.id); 
     });
 
+
+    //handle errors
     socket.on("error", (message)=>{
 
       console.log(message.errorMsg)
@@ -45,6 +50,13 @@ export const Room =(props)=>{
       console.log("some rrror cooured");
 
     })
+
+    socket.on("participants", (message)=>{
+
+      console.log(message.participantsList);
+      setParticipantsList(message.participantsList);
+
+    });
   
 
     socket.on('receive-message', (message)=>{
@@ -201,6 +213,14 @@ export const Room =(props)=>{
 
           <div className="participantsList">
                 <h3>Participants</h3>
+                <div>
+                  {participantsList.map((participant)=>{
+                    return(
+                      <p>{participant.userName}</p>
+                    )
+                  })
+                }
+                </div>
           </div>
 
           <div className="messagesList">
