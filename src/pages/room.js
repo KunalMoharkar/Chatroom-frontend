@@ -66,6 +66,11 @@ export const Room =(props)=>{
 
     })
 
+
+    return function cleanup(){
+      socket.disconnect();
+    }
+
   }, []);
 
 
@@ -84,7 +89,6 @@ export const Room =(props)=>{
 
       const data = await response.json();
       console.log(data);
-      console.log("asddsa");
       console.log(`room id is - ${data.roomId}`);
       setRoomId(data.roomId);
       
