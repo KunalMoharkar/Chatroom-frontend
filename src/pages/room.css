@@ -86,34 +86,6 @@
 
 }
 
-
-
-
-.form{
-    display: flex;
-    width: max-content;
-    flex-direction: column;
-    height: auto;
-    justify-content: space-around;
-    align-items: flex-start;
-    padding: 30px;
-    margin: 10px;
-    background-color: blueviolet;
-    border-radius: 5px;
-}
-
-.form input{
-
-    border-radius: 20px;
-    padding: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    outline: none;
-    margin: 5px;
-    margin-left: 0px;
-    border: 2px solid saddlebrown;
-}
-
 .messageForm input{
 
     border-radius: 20px;
@@ -127,28 +99,7 @@
     border: 2px solid saddlebrown;
 }
 
-.form input, .messageForm input:focus{
-    outline: none;
-}
-
-.form button{
-
-    align-self: center;
-    padding: 8px;
-    margin: 8px;
-    background-color: burlywood;
-    border: none;
-    transition-duration: 500ms;
-}
-
-.form button:hover{
-    border: none;
-    outline: none;
-    background-color: brown;
-}
-
-.form button:focus{
-    border: none;
+.messageForm input:focus{
     outline: none;
 }
 

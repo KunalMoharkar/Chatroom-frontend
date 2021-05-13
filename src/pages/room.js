@@ -5,6 +5,8 @@ import './room.css';
 
 import {Header}  from '../components/Header/Header'
 
+import {CreateRoomForm, JoinRoomForm} from '../components/Forms/forms'
+
 const ENDPOINT = "http://127.0.0.1:5000";
 
 export const Room =(props)=>{
@@ -144,49 +146,36 @@ export const Room =(props)=>{
 
   let displayForm;
 
+  const inputUserName =  <input
+                            type="text"
+                            value={userName}
+                            onChange={e => setUserName(e.target.value)}
+                          />
+
+  const inputRoomCode = <input 
+                          type="text"
+                          value={roomId}
+                          onChange={e => setRoomId(e.target.value)}
+                        />
+
   if(action === "join" && showChatwindow === false)
   {
-     displayForm =   <form className="form" onSubmit={joinRoom}>
-                                  <label>
-                                    Username:
-                                  </label>
-                                    <input
-                                      type="text"
-                                      value={userName}
-                                      onChange={e => setUserName(e.target.value)}
-                                    />
-                                 
-                                  <label>
-                                    Room code:
-                                  </label>
-                                    <input
-                                      type="text"
-                                      value={roomId}
-                                      onChange={e => setRoomId(e.target.value)}
-                                    />
-                                  
-                                  <button type="submit">Join Room</button>
-                           </form>
-
-
+     displayForm =  <JoinRoomForm
+                     submitHandler = {joinRoom}
+                     userNameLabel = "Username :"
+                     inputUserName = {inputUserName}   
+                     roomCodeLabel = "Room Code :" 
+                     inputRoomCode = {inputRoomCode} 
+                   />
+    
   }
-  
   else if(showChatwindow === false )
-  {
-     displayForm = 
-                        <form className="form" onSubmit={createRoom}>
-                          <label>
-                            Username:
-                          </label>
-                            <input
-                              type="text"
-                              value={userName}
-                              onChange={e => setUserName(e.target.value)}
-                            />
-                        
-                          <button type="submit">Create Room</button>
-                        </form>
-
+  {   
+     displayForm =  <CreateRoomForm
+                      submitHandler = {createRoom}
+                      userNameLabel = "Username :"
+                      inputUserName = {inputUserName}     
+                    />
   }
   else
   {
