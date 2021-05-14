@@ -38,5 +38,15 @@ export const JoinRoomForm = (props) =>{
     
         )
 
+}
+
+export const MessageForm = (props) =>{
+
+    return(
+        <form className="messageForm" onSubmit={props.submitHandler}>
+            {props.inputMessage}  
+            <button type="submit">Send</button>
+        </form>
+    )
 
 }

@@ -1,11 +1,12 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState,useEffect, useRef} from 'react';
 import socketIOClient from "socket.io-client";
 import {Redirect} from 'react-router-dom';
 import './room.css';
 
 import {Header}  from '../components/Header/Header'
 
-import {CreateRoomForm, JoinRoomForm} from '../components/Forms/forms'
+import {CreateRoomForm, JoinRoomForm, MessageForm} from '../components/Forms/forms'
+import {ParticipantsList} from '../components/ParticipantsList/ParticipantsList'
 
 const ENDPOINT = "http://127.0.0.1:5000";
 
@@ -14,27 +15,42 @@ export const Room =(props)=>{
 
   //state variable for socket
   const [socket,setSocket] = useState({});
-  const [name, setName] = useState("");
-
+  const [messageText, setMesssageText] = useState("");
   //username and roomId states
   const [userName, setUserName] = useState("");
   const [roomId, setRoomId] = useState("");
-
   //track error state
   const [error,setError] = useState(null);
-
   //participants
   const [participantsList, setParticipantsList] = useState([]);
-
   //queue for incoming messages
   const [messageQueue, setMessageQueue] = useState([]);
-
   const [showChatwindow, setshowChatwindow] = useState(false);
-
   //once only when component mounts connect to socket
+
+  const bottomRef = useRef(null);
+  //const bottomRef = React.createRef();
+  const scrollToBottom = () => {
+
+    if(bottomRef.current !== null)
+    {
+
+   bottomRef.current.scrollIntoView({
+  behavior: "smooth",
+  });
+
+}
+};
+
+useEffect(() => {
+  scrollToBottom();
+  //console.log(messageQueue.current);
+  //console.log(bottomRef.current);
+}, [messageQueue]);
+
+ 
   //keep listening for server events
   useEffect(() => {
-    
     
     const socket = socketIOClient(ENDPOINT);
     setSocket(socket);
@@ -42,7 +58,6 @@ export const Room =(props)=>{
     socket.on("connect", () => {
       console.log(socket.id); 
     });
-
 
     //handle errors
     socket.on("error", (message)=>{
@@ -53,6 +68,7 @@ export const Room =(props)=>{
 
     })
 
+    //listen for updates on participants
     socket.on("participants", (message)=>{
 
       console.log(message.participantsList);
@@ -60,7 +76,7 @@ export const Room =(props)=>{
 
     });
   
-
+    //keep receiving messages
     socket.on('receive-message', (message)=>{
     console.log(message);
     //populate message queue
@@ -68,7 +84,7 @@ export const Room =(props)=>{
 
     })
 
-
+    //on componenet unmount disconnect socket
     return function cleanup(){
       socket.disconnect();
     }
@@ -77,9 +93,7 @@ export const Room =(props)=>{
 
 
   const createRoom = async (evt) =>{
-
     evt.preventDefault();
-
     try {
 
       const response = await fetch(`${ENDPOINT}/getRoomId`,{
@@ -87,7 +101,6 @@ export const Room =(props)=>{
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({'socketId':socket.id}),
     });
-
 
       const data = await response.json();
       console.log(data);
@@ -99,17 +112,12 @@ export const Room =(props)=>{
         roomId: data.roomId,
       });
       
-
       console.log(data);
-      
       setshowChatwindow(true);
 
     } catch (error) {
-      console.log(error);
-      
+      console.log(error);    
     }
-
-    
 
   }
 
@@ -121,10 +129,8 @@ export const Room =(props)=>{
       username: userName,
       roomId: roomId,
     });
-    
   
     setshowChatwindow(true);
-
   }
 
   const handleSubmit = (evt) => {
@@ -134,7 +140,7 @@ export const Room =(props)=>{
     { 
       id:socket.id,
       from:userName,
-      text:name,
+      text:messageText,
       roomId:roomId
     });
 
@@ -142,8 +148,9 @@ export const Room =(props)=>{
   }
 
 
-  const action = props.match.params.action;
 
+
+  const action = props.match.params.action;
   let displayForm;
 
   const inputUserName =  <input
@@ -156,6 +163,13 @@ export const Room =(props)=>{
                           type="text"
                           value={roomId}
                           onChange={e => setRoomId(e.target.value)}
+                        />
+
+  const inputMessage =  <input
+                          type="text"
+                          placeholder="Enter your message here"
+                          value={messageText}
+                          onChange={e => setMesssageText(e.target.value)}
                         />
 
   if(action === "join" && showChatwindow === false)
@@ -186,8 +200,6 @@ export const Room =(props)=>{
 
   return(
 
-    
-
 
     <div>
 
@@ -204,19 +216,12 @@ export const Room =(props)=>{
       
       <div className="messageBox">
 
-          <div className="participantsList">
-                <h3>Participants</h3>
-                <div>
-                  {participantsList.map((participant)=>{
-                    return(
-                      <p>{participant.userName}</p>
-                    )
-                  })
-                }
-                </div>
-          </div>
+          <ParticipantsList 
+            participantsList = {participantsList}
+          />
 
           <div className="messagesList">
+
               <div className="messageQueue">
                   {messageQueue.map((message)=>{
                       return(
@@ -228,20 +233,19 @@ export const Room =(props)=>{
                         </div>
                       )
                   })} 
-              </div>
+
+                <div ref={bottomRef} className="list-bottom">
+                </div>  
+            </div>
+
 
               <div className="messageInput">
-                <form className="messageForm" onSubmit={handleSubmit}>
-                    <input
-                      type="text"
-                      placeholder="Enter your message here"
-                      value={name}
-                      onChange={e => setName(e.target.value)}
-                    />
-                  
-                    <button type="submit">Send</button>
-                </form>
+                <MessageForm
+                   submitHandler = {handleSubmit}
+                   inputMessage = {inputMessage} 
+                />
               </div>
+
             </div>
           </div>
             

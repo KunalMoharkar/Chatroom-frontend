@@ -47,3 +47,41 @@
     border: none;
     outline: none;
 }
+
+
+.messageForm input{
+
+    border-radius: 20px;
+    width: 80%;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    outline: none;
+    margin: 5px;
+    margin-left: 0px;
+    border: 2px solid saddlebrown;
+}
+
+.messageForm input:focus{
+    outline: none;
+}
+
+.messageForm{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+}
+
+.messageForm button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:40px;
+    width: 40px;
+    outline: none;
+    border: 2px solid royalblue;
+    background-color: rebeccapurple;
+    border-radius: 50%;
+}
