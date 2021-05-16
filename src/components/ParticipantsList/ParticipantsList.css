@@ -8,6 +8,7 @@
     justify-content: flex-start;
     min-height: 500px;
     overflow-y: scroll; 
+    transition-duration: 1s;
 
 
 }
@@ -28,3 +29,31 @@
     padding: 0px;
     margin: 0px;
 }
+
+.show{
+    position: relative;
+    height: 100vh;
+    z-index: 2;
+    width: 60%;
+}
+
+.hide{
+    position: relative;
+    height: 100vh;
+    z-index: 2;
+    width: 0px;
+}
+
+
+.mobile-hide{
+    display: flex;
+}
+
+
+@media only screen and (max-width: 800px) {
+    
+    .mobile-hide{
+        display: none;
+    }
+
+  }

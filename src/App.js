@@ -3,13 +3,6 @@ import {Card} from "./components/card/card";
 import './App.css';
 import {Link} from 'react-router-dom';
 
-
-import socketIOClient from "socket.io-client";
-
-
-
-const ENDPOINT = "http://127.0.0.1:5000";
-
 export const App = ()=> {
 
 

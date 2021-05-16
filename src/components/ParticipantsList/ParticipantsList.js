@@ -4,7 +4,7 @@ import './ParticipantsList.css'
 export const ParticipantsList = (props) =>{
 
     return(
-    <div className="participantsList">
+    <div className="participantsList mobile-hide">
         <h3>Participants</h3>
         
           {props.participantsList.map((participant)=>{
