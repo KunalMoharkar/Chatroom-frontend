@@ -10,11 +10,8 @@ export const Header = (props) =>{
             {props.roomId?
             <h3>Room code : {props.roomId}</h3>
             :null
-            }
-            {/*
-            
-            <button onClick={props.clickHandler}>open</button>
-            */}
+            }     
+            <button onClick={props.clickHandler}>participants</button>
         </div>
 
     )

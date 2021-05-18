@@ -13,12 +13,11 @@
     padding-left: 5%;
     padding-right: 5%;
     display: flex;
-    width: 100%;
+    width: auto;
     height: 90vh;
     align-items: flex-start;
     justify-content: center;
-    margin-left: 0px;
-    margin-right: 0px;
+    margin:0px;
 }
 
 

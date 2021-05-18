@@ -196,12 +196,15 @@ export const Room = (props) => {
           }}
         />
       ) : null}
-      <Header roomId={roomId} />
+
+      {showChatwindow?
+      <Header roomId={roomId} clickHandler={openParticipantWindow} />
+      :null    
+        }
       <div className="chatWindowContainer">
         {showChatwindow ? (
           <div className="messageBox">
-            <ParticipantsList participantsList={participantsList} clickHandler={openParticipantWindow} />
-
+            <ParticipantsList participantsList={participantsList} currentState={showParticipants} />
             <div className="messagesList">
               <div className="messageQueue">
                 {messageQueue.map((message) => {
