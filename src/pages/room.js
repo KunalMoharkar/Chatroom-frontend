@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import socketIOClient from "socket.io-client";
 import { Redirect } from "react-router-dom";
+import short from "short-uuid"
 import "./room.css";
 import { Header } from "../components/Header/Header";
 import {CreateRoomForm, JoinRoomForm, MessageForm} from "../components/Forms/forms";
 import { ParticipantsList } from "../components/ParticipantsList/ParticipantsList";
-const ENDPOINT = "http://127.0.0.1:5000";
+const ENDPOINT = "https://kdm1700-chat-room.herokuapp.com"
 
 export const Room = (props) => {
   //state variable for socket
@@ -52,7 +53,7 @@ export const Room = (props) => {
     socket.on("error", (message) => {
       console.log(message.errorMsg);
       setError(message.errorMsg);
-      console.log("some rrror cooured");
+  
     });
 
     //listen for updates on participants
@@ -193,6 +194,7 @@ export const Room = (props) => {
         <Redirect
           to={{
             pathname: "/",
+            state: {message:error}
           }}
         />
       ) : null}
@@ -209,7 +211,7 @@ export const Room = (props) => {
               <div className="messageQueue">
                 {messageQueue.map((message) => {
                   return (
-                    <div className="message">
+                    <div key={short.generate()} className="message">
                       <span>{message.from}</span>
                       <p>{message.text}</p>
                     </div>

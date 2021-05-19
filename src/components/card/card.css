@@ -6,8 +6,22 @@
     justify-content: space-around;
     align-items: center;
     width: 300px;
-    background-color: darkseagreen;
+    background-color: rgb(214, 75, 33);
     height: 200px;
     padding: 10px;
     margin: 10px;
+    box-shadow: 3px 3px 20px black;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.Card p{
+    color: rgb(59, 32, 87);
+    text-decoration: none;
+}
+
+.Card h2{
+    color: rgb(59, 32, 87);
+    text-decoration: none;
+
 }

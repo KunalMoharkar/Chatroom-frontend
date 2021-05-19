@@ -1,4 +1,5 @@
 import React from 'react'
+import short from "short-uuid"
 import './ParticipantsList.css'
 
 export const ParticipantsList = (props) =>{
@@ -10,7 +11,7 @@ export const ParticipantsList = (props) =>{
         
           {props.participantsList.map((participant)=>{
             return(
-            <div>
+            <div key={short.generate}>
               <p>{participant.userName}</p>
             </div>
             )
