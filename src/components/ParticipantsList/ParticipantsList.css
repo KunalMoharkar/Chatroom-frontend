@@ -10,8 +10,19 @@
     overflow-y: scroll; 
     transition-duration: 10s;
     background-color: black;
+    padding: 10px;
+    
+}
 
-
+.participantsList button{
+    display: flex;
+    float: right;
+    margin-bottom: 15px;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color:whitesmoke;
+    font-size:20px;
 }
 
 .participantsList div{
@@ -33,12 +44,14 @@
 
 .show{
     width: 250px;
+    animation: fadeIn 1s 0s 1;
 
 }
 
 .hide{
     width: 0;
-    
+    animation: fadeOut 1s 0s 1;
+
 
 }
 

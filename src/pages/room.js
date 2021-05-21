@@ -6,7 +6,7 @@ import "./room.css";
 import { Header } from "../components/Header/Header";
 import {CreateRoomForm, JoinRoomForm, MessageForm} from "../components/Forms/forms";
 import { ParticipantsList } from "../components/ParticipantsList/ParticipantsList";
-const ENDPOINT = "https://kdm1700-chat-room.herokuapp.com"
+const ENDPOINT = "https://kdm1700-chat-room.herokuapp.com";
 
 export const Room = (props) => {
   //state variable for socket
@@ -42,6 +42,7 @@ export const Room = (props) => {
   //once only when component mounts connect to socket
   //keep listening for server events
   useEffect(() => {
+
     const socket = socketIOClient(ENDPOINT);
     setSocket(socket);
 
@@ -53,7 +54,6 @@ export const Room = (props) => {
     socket.on("error", (message) => {
       console.log(message.errorMsg);
       setError(message.errorMsg);
-  
     });
 
     //listen for updates on participants
@@ -113,6 +113,7 @@ export const Room = (props) => {
   };
 
   const handleSubmit = (evt) => {
+    evt.preventDefault();
     console.log("sending message to server");
     socket.emit("send-message", {
       id: socket.id,
@@ -121,7 +122,8 @@ export const Room = (props) => {
       roomId: roomId,
     });
 
-    evt.preventDefault();
+    setMesssageText("");
+    
   };
 
   const openParticipantWindow = () =>{
@@ -206,7 +208,10 @@ export const Room = (props) => {
       <div className="chatWindowContainer">
         {showChatwindow ? (
           <div className="messageBox">
-            <ParticipantsList participantsList={participantsList} currentState={showParticipants} />
+            <ParticipantsList participantsList={participantsList} 
+            currentState={showParticipants} 
+            exitHandler={openParticipantWindow}/>
+
             <div className="messagesList">
               <div className="messageQueue">
                 {messageQueue.map((message) => {

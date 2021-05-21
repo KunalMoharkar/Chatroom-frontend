@@ -6,9 +6,8 @@ export const ParticipantsList = (props) =>{
 
     return(
 
-    <div className= {`participantsList ${props.currentState}`}>
-        <h3>Participants</h3>
-        
+    <div className= {`participantsList ${props.currentState}`}>   
+          <button onClick={props.exitHandler}>&#10006;</button>
           {props.participantsList.map((participant)=>{
             return(
             <div key={short.generate}>

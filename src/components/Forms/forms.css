@@ -53,10 +53,8 @@
 
     border-radius: 20px;
     width: 80%;
-    padding: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    outline: none;
+    padding: 10px;
+       outline: none;
     margin: 5px;
     margin-left: 0px;
     border: 2px solid saddlebrown;
@@ -64,6 +62,7 @@
 
 .messageForm input:focus{
     outline: none;
+    padding: 10px;
 }
 
 .messageForm{
@@ -78,8 +77,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height:40px;
-    width: 40px;
+    height:45px;
+    width: 45px;
     outline: none;
     border: 2px solid royalblue;
     background-color: rebeccapurple;
