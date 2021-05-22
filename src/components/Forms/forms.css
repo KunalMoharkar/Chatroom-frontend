@@ -7,8 +7,10 @@
     align-items: flex-start;
     padding: 30px;
     margin: 10px;
-    background-color: blueviolet;
+    background-color: rgb(134, 98, 167);
     border-radius: 5px;
+    margin-top: 100px;
+    box-shadow: 2px 2px 20px black;
 }
 
 .form input{
@@ -30,11 +32,12 @@
 .form button{
 
     align-self: center;
-    padding: 8px;
+    padding: 6px;
     margin: 8px;
     background-color: burlywood;
     border: none;
     transition-duration: 500ms;
+    border-radius: 5px;
 }
 
 .form button:hover{
@@ -54,10 +57,11 @@
     border-radius: 20px;
     width: 80%;
     padding: 10px;
-       outline: none;
+    outline: none;
     margin: 5px;
     margin-left: 0px;
     border: 2px solid saddlebrown;
+    box-shadow: 2px 2px 20px rgb(150, 149, 149);
 }
 
 .messageForm input:focus{
@@ -80,7 +84,9 @@
     height:45px;
     width: 45px;
     outline: none;
-    border: 2px solid royalblue;
-    background-color: rebeccapurple;
+    border: 2px solid saddlebrown;
+    background-color: #d38c84;
+    font-weight: bold;
     border-radius: 50%;
+    box-shadow: 2px 2px 20px rgb(150, 149, 149);
 }

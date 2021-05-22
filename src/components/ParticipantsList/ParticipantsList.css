@@ -9,7 +9,8 @@
     overflow-x: hidden;
     overflow-y: scroll; 
     transition-duration: 10s;
-    background-color: black;
+    background-color: #f4f4f4;
+    opacity: 0.9;
     padding: 10px;
     
 }
@@ -21,12 +22,12 @@
     background-color: transparent;
     outline: none;
     border: none;
-    color:whitesmoke;
+    color: orangered;
     font-size:20px;
 }
 
 .participantsList div{
-    background-color: aquamarine;
+    background-color: rgb(235, 154, 154);
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -45,14 +46,13 @@
 .show{
     width: 250px;
     animation: fadeIn 1s 0s 1;
+    opacity: 0.9;
 
 }
 
 .hide{
     width: 0;
     animation: fadeOut 1s 0s 1;
-
-
 }
 
 

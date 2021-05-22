@@ -34,6 +34,16 @@ export const Room = (props) => {
     }
   };
 
+  const copyRef = useRef(null);
+  const copyToClipboard = () =>{
+
+    const el = copyRef
+    el.select()
+    document.execCommand("copy")
+    this.setState({copySuccess: true})
+
+  }
+
   //if messageQueue did update then scroll to bottom of chat window
   useEffect(() => {
     scrollToBottom();
@@ -77,6 +87,18 @@ export const Room = (props) => {
 
   const createRoom = async (evt) => {
     evt.preventDefault();
+
+    if(socket.id === null)
+    {
+      setError("Internal server Error");
+    }
+
+    if(userName === '')
+    {
+      setError("bad request");
+    }
+
+
     try {
       const response = await fetch(`${ENDPOINT}/getRoomId`, {
         method: "POST",
@@ -103,6 +125,12 @@ export const Room = (props) => {
 
   const joinRoom = (evt) => {
     evt.preventDefault();
+
+    
+    if(userName === '' || roomId== '')
+    {
+      setError("bad request");
+    }
 
     socket.emit("join-room", {
       username: userName,

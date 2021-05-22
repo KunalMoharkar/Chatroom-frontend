@@ -8,7 +8,7 @@
     margin-bottom: 20px;
     padding-bottom: 5px;
     justify-content: space-between;
-    background-color: aqua;
+    background-color:#d45a4a;
 }
 
 .header h3{
@@ -19,7 +19,7 @@
 
 .header button{
     margin: 5px;
-    background-color: blue;
+    background-color: rgb(50, 80, 182);
     border-radius: 10px;
     padding-left: 8px;
     padding-right: 8px;
