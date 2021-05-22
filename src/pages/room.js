@@ -33,17 +33,7 @@ export const Room = (props) => {
       });
     }
   };
-
-  const copyRef = useRef(null);
-  const copyToClipboard = () =>{
-
-    const el = copyRef
-    el.select()
-    document.execCommand("copy")
-    this.setState({copySuccess: true})
-
-  }
-
+ 
   //if messageQueue did update then scroll to bottom of chat window
   useEffect(() => {
     scrollToBottom();
@@ -127,7 +117,7 @@ export const Room = (props) => {
     evt.preventDefault();
 
     
-    if(userName === '' || roomId== '')
+    if(userName === '' || roomId=== '')
     {
       setError("bad request");
     }
